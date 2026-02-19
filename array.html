@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Лабораторная работа 1</title>
+	<meta charset="utf-8">
+    <h1>Лабораторная работа по массивам от Москвитина Максима Сергеевича (19.02.2026)</h1>
+</head>
+
+<body>
+	<script type="text/javascript">
+        let arr = [ {title: "Портал", href: "https://rc.com/portal/", clicks: 0},
+                    {title: "База знаний", href: "https://rc.com/baseknowledge/", clicks: 0},
+                    {title: "О компании", href: "https://rc.com/company/", clicks: 0},
+                    {title: "Новости", href: "https://rc.com/news/", clicks: 0},
+                    {title: "Карта сайта", href: "https://rc.com/map/", clicks: 0},
+                    {title: "Кадры", href: "https://rc.com/hr/", clicks: 0}
+        ];
+        
+        arr.forEach( a => a.clicks = Math.round(Math.random()*99) + 1)
+            
+        let filteredArr = arr 
+            .filter( f => f.clicks >= 50)
+            .sort((a, b) => b.clicks - a.clicks)
+            .forEach(f => document.write(`<a href="${f.href}">${f.title} (${f.clicks})</a><br>`) );
+	</script>
+</body>
+</html>
