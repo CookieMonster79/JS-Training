@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Лабораторная работа 2</title>
+	<meta charset="utf-8">
+    <h1>Лабораторная работа по окнам от Москвитина Максима Сергеевича (24.02.2026)</h1>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var win, timer;
+        function clockStart(){
+            if (!timer) {
+                win = open("","window","width=400,height=300");
+                timer = setInterval(
+                    function(){
+                        win.document.open()
+                        win.document.write('<h1>'+(new Date().toLocaleTimeString())+'</h1>');
+                        win.document.close();
+                    }
+                ,1000);
+            }
+        }
+
+        function clockStop() {
+            clearInterval(timer);
+            win.close();
+            timer = null;
+        }
+
+	</script>
+
+    <div id="demoLinks">
+	    <a href="javascript:clockStart()">Запустить часики </a>
+        <br>
+		<a href="javascript:clockStop()">Остановить часики</a>
+	</div>
+</body>
+</html>
