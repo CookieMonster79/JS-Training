@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Лабораторная работа 3</title>
+	<meta charset="utf-8">
+    <h1>Лабораторная работа по DOM от Москвитина Максима Сергеевича (26.02.2026)</h1>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <h3>Живопись</h3>
+            <ul>
+                <li>Рембрандт</li>
+                <li>Айвазовский</li>
+                <li>Шишкин</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Литература</h3>
+            <ul>
+                <li>Пушкин</li>
+                <li>Лермонтов</li>
+                <li>Гоголь</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Скульптура</h3>
+            <ul>
+                <li>Роден</li>
+                <li>Микеланджело</li>
+                <li>Церетели</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <script type="text/javascript">
+        let allUL = document.querySelectorAll('ul > li > ul')
+
+        function hide(){
+            allUL.forEach(l => l.style.display = 'none');
+        }
+
+        function show() {
+            allUL.forEach(l => l.style.display = '');
+        }
+
+	</script>
+
+    <div id="demoLinks">
+	    <a href="javascript:hide()">Свернуть</a>
+        <br>
+		<a href="javascript:show()">Развернуть</a>
+	</div>
+</body>
+</html>
