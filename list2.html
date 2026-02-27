@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Лабораторная работа 4</title>
+	<meta charset="utf-8">
+    <h1>Лабораторная работа по DOM 2 от Москвитина Максима Сергеевича (27.02.2026)</h1>
+</head>
+
+<body>
+    <h1>Создание элементов</h1>
+    <ul id="list">
+        <li>Живопись</li>
+        <li>Музыка</li>
+        <li>Скульптура</li>
+    </ul>
+
+    
+    <script type="text/javascript">
+        let list = document.getElementById('list')
+        let items = list.getElementsByTagName("li");
+
+        function add(){
+            const textNewLI = prompt('Пожалуйста введите добавляемый пункт:', '');
+
+            if (textNewLI) {
+                let newLI = document.createElement('li');
+                newLI.textContent = textNewLI;
+                //добавляем в конец списка
+                //list.appendChild(newLI);
+
+                //добавляем в начало списка
+                //list.insertBefore(newLI, list.firstChild)
+
+                let inserted = false;
+
+                for (let i = 0; i < items.length; i++) {
+                    // Сравниваем строки с учетом регистра
+                    if (textNewLI.localeCompare(items[i].textContent, 'ru', { sensitivity: 'base' }) < 0) {
+                        list.insertBefore(newLI, items[i]);
+                        inserted = true;
+                        break;
+                    }
+                }
+                
+                // Если не нашли позицию для вставки, добавляем в конец
+                if (!inserted) {
+                    list.appendChild(newLI);
+                }
+            }
+        }
+
+        function del(){
+            if (items.length > 0) {
+                var lastItem = items[items.length - 1];
+                let confirmDelete = confirm(`Удалить пункт "${lastItem.textContent}"?`);
+                if (lastItem && confirmDelete) {
+                    // Удаляем последний элемент
+                    list.removeChild(lastItem);
+                }
+            } else {
+                // Если список пуст
+                alert("Список уже пуст!");
+            }
+        }
+	</script>
+
+    <div id="demoLinks">
+	    <a href="javascript:add()">Добавить...</a>
+        <br>
+		<a href="javascript:del()">Удалить...</a>
+	</div>
+</body>
+</html>
