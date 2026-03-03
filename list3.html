@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Лабораторная работа 4</title>
+	<meta charset="utf-8">
+    <h1>Лабораторная работа по DOM 3 (пункт 3 со звездочкой) от Москвитина Максима Сергеевича (03.03.2026)</h1>
+</head>
+
+<body>
+    <h1>Создание элементов</h1>
+    <ul id="list">
+        <li>Живопись</li>
+        <li>Музыка</li>
+        <li>Скульптура</li>
+    </ul>
+
+    
+    <script type="text/javascript">
+        let list = document.getElementById('list')
+        let items = list.getElementsByTagName("li");
+        let allLI = document.querySelectorAll("LI");
+        let selectedLi = null;
+
+        document.onreadystatechange = ()=>{
+            if (document.readyState === 'interactive') {
+
+				allLI.forEach(li =>{
+					li.addEventListener('click', clickItem);
+				})
+            }
+        }
+
+        function add(){
+            const textNewLI = prompt('Пожалуйста введите добавляемый пункт:', '');
+
+            if (textNewLI) {
+                let newLI = document.createElement('li');
+                newLI.textContent = textNewLI;
+
+                let inserted = false;
+
+                for (let i = 0; i < items.length; i++) {
+                    // Сравниваем строки с учетом регистра
+                    if (textNewLI.localeCompare(items[i].textContent, 'ru', { sensitivity: 'base' }) < 0) {
+                        list.insertBefore(newLI, items[i]);
+                       
+                        newLI.addEventListener('click', clickItem);
+
+                        inserted = true;
+                        break;
+                    }
+                }
+                
+                // Если не нашли позицию для вставки, добавляем в конец
+                if (!inserted) {
+                    list.appendChild(newLI);
+                }
+            }
+        }
+
+        function clickItem(){
+			if (selectedLi) selectedLi.style.color = '';
+			if (selectedLi != this) {
+			    this.style.color = 'red';
+				selectedLi = this;
+			}
+            else selectedLi = null;
+        }
+
+
+        function del(){
+            if (items.length > 0) {
+                let confirmDelete = confirm(`Удалить пункт "${selectedLi.textContent}"?`);
+                if (selectedLi && confirmDelete) {
+                    list.removeChild(selectedLi);
+                }
+            } else {
+                // Если список пуст
+                alert("Список уже пуст!");
+            }
+        }
+	</script>
+
+    <div id="demoLinks">
+	    <a href="javascript:add()">Добавить...</a>
+        <br>
+		<a href="javascript:del()">Удалить...</a>
+	</div>
+</body>
+</html>
