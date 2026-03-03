@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<title>Структура DOM</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript">
+            function updateUL(visible) {
+                document
+                    .querySelectorAll('ul > li > ul')
+                    .forEach( ul => ul.style.display = visible ? '' : 'none');
+            }
+
+		
+            document.addEventListener('readystatechange', ()=>{
+                if (document.readyState === 'interactive')
+                    document.querySelectorAll('ul > li > h3')
+    				.forEach( h => h.addEventListener ('dblclick', function(e){
+                            let ul = this.parentNode.querySelector('ul');
+                            if (ul) ul.style.display = ul.style.display == 'none' ? '': 'none';
+                    }));
+            });
+	</script>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <h3>Живопись</h3>
+            <ul>
+                <li>Рембрандт</li>
+                <li>Айвазовский</li>
+                <li>Шишкин</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Литература</h3>
+            <ul>
+                <li>Пушкин</li>
+                <li>Лермонтов</li>
+                <li>Гоголь</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Скульптура</h3>
+            <ul>
+                <li>Роден</li>
+                <li>Микеланджело</li>
+                <li>Церетели</li>
+            </ul>
+        </li>
+    </ul>
+    <div>
+        <a href="javascript:updateUL(false)">Свернуть</a>&nbsp;
+        <a href="javascript:updateUL(true)">Развернуть</a>
+    </div>
+</body>
+</html>
