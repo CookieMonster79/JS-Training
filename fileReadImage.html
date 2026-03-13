@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+
+        // Промисификация
+        function getImgReader(file) {
+            return new Promise(
+                (resolve, reject) => {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        if (reader.result)
+                            resolve(reader.result);
+                        else
+                            reject('Empty data')
+                    }
+                    reader.onerror = function (e) {
+                        reject(reader.error);
+                    }
+                    reader.readAsDataURL(file);
+
+                }
+            );
+        }
+
+
+        async function readImgFile() {
+            var f = document.getElementById("imgFile");
+            if (f.files.length != 0) {
+                getImgReader(f.files[0])
+                    .then(r => {
+                        document.getElementById("result").src = r
+                    })
+                    .catch(e => console.log(e));
+            }
+        }
+
+
+    </script>
+    <style>
+        span {
+            background: yellow;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>File API</h1>
+    <input type="file" id="imgFile" onchange="readImgFile()">
+
+    <img id="result">
+    </pre>
+</body>
+
+</html>
